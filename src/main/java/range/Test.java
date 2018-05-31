@@ -1,11 +1,20 @@
 package range;
 
 
+
+
+
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.cert.X509Certificate;
+
+
+import java.sql.Driver;
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -90,11 +99,15 @@ public class Test {
 
     public static void main(String[] args) throws Exception{
 
+        ServiceLoader<Driver> loader = ServiceLoader.load(Driver.class);
+        Iterator<Driver> iterator = loader.iterator();
+        while (iterator.hasNext()) {
+            Driver driver = (Driver) iterator.next();
+            System.out.println("driver:" + driver.getClass() + ",loader:" + driver.getClass().getClassLoader());
+        }
 
-
-
-
-
+        ClassLoader.getSystemClassLoader().loadClass("");
+        System.out.println("system loader:" + ClassLoader.getSystemClassLoader());
 
 
 
